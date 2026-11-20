@@ -12,12 +12,12 @@ data_issues:
     present: true
     column: days_from_tracking_page         # the column that must not be used as a feature
   unit_mixup:
-    present: null
-    column: null           # the column recorded in a different unit
-    group_value: null      # the value of destination whose rows are affected
-    factor: null           # wrong value = right value x factor
+    present: true
+    column: weight_kg        # the column recorded in a different unit
+    group_value: Tier-2     # the value of destination whose rows are affected
+    factor: 1000           # wrong value = right value x factor
   sentinel_value:
-    present: null
+    present: false
     column: null
     value: null            # the special number typed instead of a blank
     count: null            # how many rows have it
@@ -25,13 +25,13 @@ data_issues:
     present: false
     count: null            # number of EXTRA copies (rows you would delete)
   stuck_sensor:
-    present: null
+    present: false
     column: null
     start_date: null       # first date with the stuck value, YYYY-MM-DD
     end_date: null         # last date with the stuck value, YYYY-MM-DD
   target_typos:
-    present: null
-    count: null            # rows whose target was typed 10 times too big
+    present: true
+    count: 14         # rows whose target was typed 10 times too big
   spelling_variants:
     present: true
     column: service
