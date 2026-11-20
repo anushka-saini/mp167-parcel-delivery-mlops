@@ -13,3 +13,14 @@ target: delivery_days
 leak_cols: []          # fill after the leak check
 features: [distance_km, weight_kg, hub_backlog, pin_code_tier, declared_value_rs, transfers, service, destination]
 seed: 42
+cat_features: [service, destination]
+val_frac: 0.2          # last 20% of dates used for validation
+models:
+  - type: Ridge
+    args: {alpha: 1.0}
+  - type: RandomForest
+    args: {n_estimators: 200, max_depth: 4}
+  - type: RandomForest
+    args: {n_estimators: 200, max_depth: 10}
+  - type: GradientBoosting
+    args: {n_estimators: 200, max_depth: 3, learning_rate: 0.05}
