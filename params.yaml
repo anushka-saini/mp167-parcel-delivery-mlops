@@ -1,0 +1,15 @@
+paths:
+  train: data/raw/train.csv
+  later: data/raw/later.csv
+  holdout: data/raw/holdout_features.csv
+  model: models/model.joblib
+  preds: predictions/holdout_predictions.csv
+  findings: reports/findings.yaml
+mlflow:
+  uri: sqlite:///mlflow.db
+  experiment: mp167-delivery-days
+  model_name: mp167
+target: delivery_days
+leak_cols: []          # fill after the leak check
+features: [distance_km, weight_kg, hub_backlog, pin_code_tier, declared_value_rs, transfers, service, destination]
+seed: 42
