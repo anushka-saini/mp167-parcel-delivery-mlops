@@ -11,7 +11,7 @@ SCSE3040 MLOps mini project.
 | S24CSEU1046 | Anushka Saini | `anushka-saini` | Data lead / Model lead |
 | S24CSEU1075 | Poorvi Mahajan | `<username>` | TBD |
 | S24CSEU1051 | Abhinav | `<username>` | TBD |
-| S24CSEU1070 | Khushi Tarneja | `<username>` | TBD |
+| S24CSEU1070 | Khushi Tarneja | `khushitarneja` | Service lead |
 
 ## Setup
 ```bash
