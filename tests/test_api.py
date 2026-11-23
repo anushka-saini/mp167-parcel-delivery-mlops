@@ -1,3 +1,6 @@
+import io
+import json
+import logging
 
 from fastapi.testclient import TestClient
 
@@ -85,3 +88,30 @@ def test_messy_service():
     data["service"] = " STANDARD"
     response = client.post("/predict", json=data)
     assert response.status_code == 200
+
+def test_json_fmt():
+    import json
+    import logging
+    from app.main import JsonFmt
+
+    rec = logging.LogRecord("x", logging.INFO, "", 0, "hi", None, None)
+    rec.extra_data = {"destination": "Metro"}
+    out = json.loads(JsonFmt().format(rec))
+    assert out["msg"] == "hi"
+    assert out["destination"] == "Metro"
+
+
+def test_predict_logs():
+    from app.main import log, JsonFmt
+
+    buf = io.StringIO()
+    h = logging.StreamHandler(buf)
+    h.setFormatter(JsonFmt())
+    log.addHandler(h)
+    try:
+        client.post("/predict", json=get_data())
+    finally:
+        log.removeHandler(h)
+    out = json.loads(buf.getvalue().strip().splitlines()[-1])
+    assert out["msg"] == "prediction"
+    assert out["destination"] == "Tier-2"

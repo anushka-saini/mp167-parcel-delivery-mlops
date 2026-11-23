@@ -1,4 +1,7 @@
-
+import json
+import logging
+import sys
+import time
 from pathlib import Path
 
 import joblib
@@ -21,6 +24,25 @@ MODEL_PATH = ROOT / config["paths"]["model"]
 model = joblib.load(MODEL_PATH)
 
 app = FastAPI(title="Parcel Delivery Prediction API")
+
+
+class JsonFmt(logging.Formatter):
+    def format(self, rec):
+        out = {
+            "time": self.formatTime(rec),
+            "level": rec.levelname,
+            "msg": rec.getMessage(),
+        }
+        out.update(getattr(rec, "extra_data", {}))
+        return json.dumps(out)
+
+
+h = logging.StreamHandler(sys.stdout)
+h.setFormatter(JsonFmt())
+log = logging.getLogger("mp167")
+log.setLevel(logging.INFO)
+log.addHandler(h)
+log.propagate = False
 
 
 class ParcelInput(BaseModel):
@@ -58,6 +80,17 @@ def health():
 
 @app.post("/predict")
 def predict(data: ParcelInput):
+    t0 = time.time()
     df = pd.DataFrame([data.model_dump()], columns=FEATURES)
-    result = model.predict(df)[0]
-    return {"prediction": float(result)}
+    try:
+        result = float(model.predict(df)[0])
+    except Exception:
+        log.exception("prediction failed")
+        raise
+    log.info("prediction", extra={"extra_data": {
+        "prediction": result,
+        "service": data.service,
+        "destination": data.destination,
+        "ms": round((time.time() - t0) * 1000, 2),
+    }})
+    return {"prediction": result}
