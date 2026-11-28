@@ -44,19 +44,21 @@ tracking:
   champion_version: 1
 
 monitoring:
-  psi:                     # cleaned train.csv vs later.csv, 10 bins
-    distance_km: null
-    weight_kg: null
-    hub_backlog: null
-    pin_code_tier: null
-    declared_value_rs: null
-    transfers: null
-  most_drifted_feature: null
-  mae_by_group:            # v1 on later.csv, per value of destination
-    'Metro': null
-    'Tier-2': null
-    'Rural': null
-  worst_served_group: null
+  psi:
+    distance_km: 0.067547
+    weight_kg: 0.067622
+    hub_backlog: 0.035409
+    pin_code_tier: 0.000338
+    declared_value_rs: 0.053961
+    transfers: 5.284449
+  most_drifted_feature: transfers
+
+  mae_by_group:
+    'Metro': 0.539925
+    'Tier-2': 0.549075
+    'Rural': 3.363850
+  worst_served_group: Rural
+  
   mae_v1_on_check: null    # v1 on the last 30% of later.csv (by date)
   mae_v2_on_check: null    # v2 on the same rows
   decision: null           # promote or keep
