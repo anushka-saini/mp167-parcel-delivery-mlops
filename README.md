@@ -10,7 +10,7 @@ SCSE3040 MLOps mini project.
 |---|---|---|---|
 | S24CSEU1046 | Anushka Saini | `anushka-saini` | Data lead / Model lead |
 | S24CSEU1075 | Poorvi Mahajan | `<username>` | TBD |
-| S24CSEU1051 | Abhinav | `<username>` | TBD |
+| S24CSEU1051 | Abhinav | `abhinavchoudhary310-pixel` | Retraining, model promotion, and holdout predictions |
 | S24CSEU1070 | Khushi Tarneja | `khushitarneja` | Service lead |
 
 ## Setup
@@ -34,8 +34,9 @@ Copy the original `train.csv` and `later.csv` into `data/raw/` (never open them 
 5. Tests: `pytest`
 6. Service: `uvicorn app.main:app --port 8000` (in progress)
 7. Docker: `docker build -t mp167-api:1.0 .` (in progress)
-8. Drift + v2: `python -m src.mp167.monitor` (in progress)
-9. Holdout: `python -m src.mp167.predict` (in progress)
+8. Drift monitoring: `python -m src.mp167.monitor` (in progress)
+9. Compare v1 and v2 with `python -m src.mp167.retrain --dry`. Review both MAEs, then run `python -m src.mp167.retrain` once to register v2 and record the decision in `reports/findings.yaml`.
+10. Run `python -m src.mp167.predict` after registration to write 250 champion predictions to `predictions/holdout_predictions.csv`.
 
 ## Layout
 - `src/mp167/`: checks, cleaning, training, monitoring, prediction
