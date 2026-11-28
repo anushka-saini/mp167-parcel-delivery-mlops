@@ -9,7 +9,7 @@ SCSE3040 MLOps mini project.
 | Enrolment no. | Name | GitHub | Role |
 |---|---|---|---|
 | S24CSEU1046 | Anushka Saini | `anushka-saini` | Data lead / Model lead |
-| S24CSEU1075 | Poorvi Mahajan | `<username>` | TBD |
+| S24CSEU1075 | Poorvi Mahajan | s24cseu1075 | Drift / Monitoring lead |
 | S24CSEU1051 | Abhinav | `<username>` | TBD |
 | S24CSEU1070 | Khushi Tarneja | `khushitarneja` | Service lead |
 
